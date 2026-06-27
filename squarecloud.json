@@ -1,0 +1,9 @@
+{
+  "name": "SuperstoreApp",
+  "description": "Flask Products Catalog",
+  "main": "app.py",
+  "memory": 512,
+  "version": "recommended",
+  "subdomain": "superstore.squareweb.app",
+  "start": "gunicorn app:app"
+}
