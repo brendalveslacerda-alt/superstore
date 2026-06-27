@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Products — Superstore{% endblock %}
+
+{% block content %}
+
+<!-- Formulário de busca -->
+<form method="get" style="margin-bottom: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
+
+    <input
+        type="text"
+        name="q"
+        value="{{ search }}"
+        placeholder="Search by name, category..."
+        style="padding: 10px; width: 300px; border: 1px solid #ccc; border-radius: 6px;">
+
+    <!-- Menu de categorias -->
+    <select name="cat" style="padding: 10px; border: 1px solid #ccc; border-radius: 6px;">
+        <option value="">All categories</option>
+        {% for cat in categories %}
+            <option value="{{ cat['category'] }}"
+                {% if cat['category'] == category %}selected{% endif %}>
+                {{ cat['category'] }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <button type="submit"
+        style="padding: 10px 20px; background: #2c3e50; color: white; border: none; border-radius: 6px; cursor: pointer;">
+        Search
+    </button>
+
+</form>
+
+<!-- Contagem de resultados -->
+<p style="margin-bottom: 16px; color: #666;">
+    {{ products|length }} product(s) found
+</p>
+
+<!-- Tabela de produtos -->
+<table>
+    <thead>
+        <tr>
+            <th>Product ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Sub-category</th>
+            <th>Detail</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in products %}
+        <tr>
+            <td><code>{{ p['product_id'] }}</code></td>
+            <td>{{ p['product_name'] }}</td>
+            <td>
+                <!-- badge colorido por categoria -->
+                <span class="badge {{ p['category'].replace(' ', '.') }}">
+                    {{ p['category'] }}
+                </span>
+            </td>
+            <td>{{ p['sub_category'] }}</td>
+            <td>
+                <a href="/product/{{ p['product_id'] }}"
+                   style="color: #2980b9;">Ver →</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

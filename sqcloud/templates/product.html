@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}{{ product['product_name'] }}{% endblock %}
+
+{% block content %}
+
+<a href="/" style="color: #2980b9;">← Voltar</a>
+
+{% if produto %}
+<div style="background: white; padding: 32px; border-radius: 8px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.1); margin-top: 20px;">
+
+    <h2 style="margin-bottom: 24px;">{{ product['product_name'] }}</h2>
+
+    <table style="width: auto;">
+        <tr>
+            <th>Product ID</th>
+            <td><code>{{ product['product_id'] }}</code></td>
+        </tr>
+        <tr>
+            <th>Categoria</th>
+            <td>{{ product['category'] }}</td>
+        </tr>
+        <tr>
+            <th>Subcategoria</th>
+            <td>{{ product['sub_category'] }}</td>
+        </tr>
+    </table>
+</div>
+
+{% else %}
+    <p style="margin-top: 20px; color: red;">Product not found.</p>
+{% endif %}
+
+{% endblock %}
